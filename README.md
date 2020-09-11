@@ -1,11 +1,27 @@
 # kafka
 
 Kafkaやってみた。
+> https://kafka.apache.org/
 
-KafkaのVersionは`2.4.1`
+## Requirements
 
-***
-## TODO
+- Docker
+- docker-compose
+
+## Usage
+
+```sh
+$ docker-compose up -d
+```
+
+> NOTE:
+> - https://hub.docker.com/r/bitnami/kafka
+> - https://bitnami.com/stack/kafka
+> - https://docs.bitnami.com/general/infrastructure/kafka/
+
+## Note
+
+- https://logmi.jp/tech/articles/320330
 
 Kafkaインストール
 > https://kafka.apache.org/quickstart
@@ -24,9 +40,3 @@ Kafka クラスタ
 
 FluentdでKafkaにデータを送る
 > https://github.com/fluent/fluent-plugin-kafka
-
-***
-## 備考
-
-https://kafka.apache.org/
-https://logmi.jp/tech/articles/320330
