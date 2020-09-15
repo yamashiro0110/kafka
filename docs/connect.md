@@ -6,9 +6,7 @@ Kafka Connectとは？
 Kafka Connect is a tool for scalably and reliably streaming data between Apache Kafka and other systems. It makes it simple to quickly define connectors that move large collections of data into and out of Kafka. Kafka Connect can ingest entire databases or collect metrics from all your application servers into Kafka topics, making the data available for stream processing with low latency. An export job can deliver data from Kafka topics into secondary storage and query systems or into batch systems for offline analysis.
 > Kafka Connectは、Apache Kafkaと他のシステムの間でスケーラブルかつ確実にデータをストリーミングするためのツールです。 大規模なデータのコレクションをKafkaの内外に移動するコネクタをすばやく簡単に定義できます。 Kafka Connectは、データベース全体を取り込むか、すべてのアプリケーションサーバーからメトリックを収集してKafkaトピックに入れ、データを低レイテンシでストリーム処理できるようにします。 エクスポートジョブは、Kafkaトピックからのデータをセカンダリストレージとクエリシステムに、またはオフライン分析用のバッチシステムに配信できます。
 
-## example
-
-スタンドアローンで起動する。
+## example: スタンドアローンで起動
 
 > NOTE: `connect-file-source.properties`と`connect-file-sink.properties`は、imageに元々含まれているサンプルのコネクタ設定ファイル
 
@@ -57,4 +55,62 @@ consoleに出力する。
 
 ```sh
 $ bin/kafka-console-consumer.sh --bootstrap-server=localhost:9092 --topic connect-test --from-beginning
+```
+
+## example: Distributedで起動
+
+Connectorを起動
+
+```sh
+$ bin/connect-distributed.sh config/connect-distributed.properties
+```
+
+ConnectorSourceを登録
+
+```sh
+$ curl -d \
+  '{
+      "name": "local-file-source",
+      "config": {
+          "connector.class": "FileStreamSource",
+          "tasks.max": 1,
+          "file": "test-distributed.txt",
+          "topic": "connect-distributed"
+      }
+  }' \
+  -H "Content-Type: application/json" \
+  -X POST http://localhost:8083/connectors
+```
+
+ConnectorSinkを登録
+
+```sh
+$ curl -d \
+  '{
+      "name": "local-file-sink",
+      "config": {
+          "connector.class": "FileStreamSink",
+          "tasks.max": 1,
+          "file": "test-distributed.sink.txt",
+          "topics": "connect-distributed"
+      }
+  }' \
+  -H "Content-Type: application/json" \
+  -X POST http://localhost:8083/connectors
+```
+
+> `test-distributed.txt`の内容が、`test-distributed.sink.txt`に同期される
+
+登録済みのconnectorを確認
+
+```sh
+$ curl localhost:8083/connectors
+["local-file-source","local-file-sink"]
+```
+
+consoleに出力する
+
+```sh
+./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic connect-distributed --from-beginning
+# test-distributed.txtの内容が出力される
 ```
