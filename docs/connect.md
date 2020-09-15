@@ -114,3 +114,7 @@ consoleに出力する
 ./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic connect-distributed --from-beginning
 # test-distributed.txtの内容が出力される
 ```
+
+## Note
+
+- https://www.baeldung.com/kafka-connectors-guide
