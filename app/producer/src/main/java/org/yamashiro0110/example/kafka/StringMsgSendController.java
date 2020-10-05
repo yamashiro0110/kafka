@@ -7,6 +7,7 @@ import org.springframework.kafka.core.KafkaProducerException;
 import org.springframework.kafka.core.KafkaSendCallback;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,7 @@ public class StringMsgSendController {
     };
 
     @GetMapping(path = "/kafka/send/string")
+    @Transactional
     public ResponseEntity<?> send(@RequestParam("msg") final String msg) {
         final ListenableFuture<SendResult<String, String>> future = this.kafkaTemplate.send(KafkaProducerApp.TOPIC_NAME, msg);
         future.addCallback(this.callback);
