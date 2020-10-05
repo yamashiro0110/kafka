@@ -1,4 +1,4 @@
-package org.yamashiro0110.example.kafka.example.kafka;
+package org.yamashiro0110.example.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
