@@ -2,7 +2,6 @@ package org.yamashiro0110.example.kafka;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaProducerException;
 import org.springframework.kafka.core.KafkaSendCallback;
@@ -19,7 +18,6 @@ import java.util.Map;
  * Controllerで受け取ったパラメータをtopicに送信する
  */
 @RestController
-@RepositoryRestController
 @Slf4j
 public class StringMsgSendController {
     @Autowired
