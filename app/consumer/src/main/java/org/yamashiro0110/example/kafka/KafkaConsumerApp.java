@@ -13,6 +13,7 @@ import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
+import org.springframework.kafka.listener.ContainerProperties;
 
 import java.util.Map;
 
@@ -47,6 +48,7 @@ public class KafkaConsumerApp {
         factory.setConsumerFactory(this.consumerFactory());
         factory.setConcurrency(3);
         factory.getContainerProperties().setPollTimeout(5_000);
+        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.RECORD);
         return factory;
     }
 }
