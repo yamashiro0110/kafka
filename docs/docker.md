@@ -34,3 +34,8 @@ $ docker-compose -f docker-compose-cluster.yml up
 ```
 
 [CMAK](http://localhost:9000)で、管理コンソールにアクセスできる。
+
+## NOTE
+
+KafkaをDockerで起動するときの注意点
+> https://rmoff.net/2018/08/02/kafka-listeners-explained/
