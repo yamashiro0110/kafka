@@ -24,3 +24,13 @@ $ docker exec -it kafka_kafka_1 bash
 # kafkaのインストールディレクトリに移動
 $ cd /opt/bitnami/kafka
 ```
+
+## Kafka Cluster
+
+Kafka Clusterを起動する。
+
+```sh
+$ docker-compose -f docker-compose-cluster.yml up
+```
+
+[CMAK](http://localhost:9000)で、管理コンソールにアクセスできる。
