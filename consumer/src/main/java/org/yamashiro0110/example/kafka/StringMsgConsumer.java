@@ -10,10 +10,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class StringMsgConsumer {
 
-    @KafkaListener(topics = "topic-1", id = "test-consumer-group")
+    @KafkaListener(topics = "topic-1", id = "test-consumer-group-1")
     @Transactional
-    public void listen(final ConsumerRecord<?, ?> record) {
-        log.info("messageを取得しました {}", record);
+    public void listen1(final ConsumerRecord<?, ?> record) {
+        log.info("[test-consumer-group-1] messageを取得しました {}", record);
     }
 
+    @KafkaListener(topics = "topic-1", id = "test-consumer-group-2")
+    @Transactional
+    public void listen2(final ConsumerRecord<?, ?> record) {
+        log.info("[test-consumer-group-2] messageを取得しました {}", record);
+    }
 }
