@@ -1,42 +1,27 @@
-# kafka
+# Kafka - app
 
-Kafkaやってみた。
-> https://kafka.apache.org/
+kafkaのProducer/Consumerのアプリケーション。
 
 ## Requirements
 
-- Docker
-- docker-compose
+- Docker(>= 19.03.13)
+- docker-compose(>= 1.27.4)
+- Java11
 
 ## Usage
 
+kafka broker
+
+> [see docs/docker.md](docs/docker.md)
+
+kafka producer
+
 ```sh
-$ docker-compose up -d
+$ ./gradlew :producer:bootRun
 ```
 
-> NOTE:
-> - https://hub.docker.com/r/bitnami/kafka
-> - https://bitnami.com/stack/kafka
-> - https://docs.bitnami.com/general/infrastructure/kafka/
+kafka consumer
 
-## Note
-
-- https://logmi.jp/tech/articles/320330
-
-Kafkaインストール
-> https://kafka.apache.org/quickstart
-
-Kafka Connect
-> https://kafka.apache.org/quickstart#quickstart_kafkaconnect
-
-Kafka Stream
-> https://kafka.apache.org/24/documentation/streams/quickstart
-
-Kafka クラスタ
-> https://kafka.apache.org/quickstart#quickstart_multibroker
-
-バージョン間の差異を調べる
-> https://kafka.apache.org/documentation/#upgrade
-
-FluentdでKafkaにデータを送る
-> https://github.com/fluent/fluent-plugin-kafka
+```sh
+$ ./gradlew :consumer:bootRun
+```
