@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <springProperty scope="context" name="kafkaEventLog" source="example.kafka.event.log"
+                    defaultValue="tmp/kafka.log"/>
+    <springProperty scope="context" name="kafkaEventLogMaxHistory" source="example.kafka.event.log.max-history"
+                    defaultValue="10"/>
+
+    <!-- kafkaに送信するメッセージの出力先, `org.yamashiro0110.example.kafka.CamelMsgSender`で参照される -->
+    <appender name="kafkaEventLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <file>${kafkaEventLog}</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${kafkaEventLog}.%d{yyyyMMdd-HHmm}.%i.gz</fileNamePattern>
+            <maxHistory>${kafkaEventLogMaxHistory}</maxHistory>
+            <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+            <totalSizeCap>${LOG_FILE_TOTAL_SIZE_CAP:-0}</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Kafkaに送信するメッセージのlogger -->
+    <logger name="kafkaEventLog">
+        <appender-ref ref="kafkaEventLogAppender"/>
+    </logger>
+</configuration>
