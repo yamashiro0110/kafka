@@ -12,7 +12,7 @@ kafkaのProducer/Consumerのアプリケーション。
 
 kafka broker
 
-> [see docs/docker.md](docs/docker.md)
+> see [docs/docker.md](docs/docker.md)
 
 kafka producer
 
@@ -25,3 +25,7 @@ kafka consumer
 ```sh
 $ ./gradlew :consumer:bootRun
 ```
+
+## NOTE
+
+試してみたことの[memo](docs/README.md)
